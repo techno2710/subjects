@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+
+    <style>
+        *{
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>Subjects</title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const params = new URLSearchParams(window.location.search);
-            const lang = params.get("lang");
+            const name = params.get("name");
 
             const links = {
                 "D": "shortcuts://run-shortcut?name=D",
                 "E": "shortcuts://run-shortcut?name=E1",
             };
 
-            if (lang && links[lang]) {
-                window.location.href = links[lang];
+            if (name && links[name]) {
+                // Weiterleiten
+                window.location.href = links[name];
+
+                // Versuch, den Tab zu schließen
+                setTimeout(function() {
+                    try {
+                        window.close();
+                    } catch (e) {
+                        // Hinweis, falls Schließen blockiert wird
+                        document.body.innerHTML += "<p>Der Tab kann nicht automatisch geschlossen werden. Bitte manuell schließen.</p>";
+                    }
+                }, 500);
             } else {
-                // Fallback-Ausgabe
                 document.body.innerHTML = "<h2>Ungültiger oder fehlender Parameter!</h2>";
             }
         });
