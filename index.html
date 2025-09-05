@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const params = new URLSearchParams(window.location.search);
+            const lang = params.get("lang");
+
+            const links = {
+                "D": "shortcuts://run-shortcut?name=D",
+                "E": "shortcuts://run-shortcut?name=E1",
+            };
+
+            if (lang && links[lang]) {
+                window.location.href = links[lang];
+            } else {
+                // Fallback-Ausgabe
+                document.body.innerHTML = "<h2>Ungültiger oder fehlender Parameter!</h2>";
+            }
+        });
+    </script>
+</head>
+<body>
+<p>Weiterleitung läuft…</p>
+</body>
+</html>
